@@ -12,7 +12,7 @@ def home_view(request, *args, **kwargs):
 
 # Create your views here.
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
+    form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
 

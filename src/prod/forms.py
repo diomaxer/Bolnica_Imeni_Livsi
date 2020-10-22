@@ -9,6 +9,7 @@ class ProductForm(forms.ModelForm):
             'name',
             'id_number',
             'description',
+            'image',
             'year',
             'diameter1',
             'diameter2',

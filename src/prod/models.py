@@ -164,6 +164,7 @@ class ZipMaterial(models.Model):
 class Product(models.Model):
     name = models.CharField('Название часов', max_length=150)
     id_number = models.CharField('Идентификационный номер', max_length=30)
+    image = models.ImageField('Картинка', upload_to='images/', null=True, blank=True)
     description = models.TextField('Описание', max_length=500)
     year = models.IntegerField("Год выпуска", null=True, blank=True)
     diameter1 = models.IntegerField('Диаметр1 мм', null=True, blank=True)
