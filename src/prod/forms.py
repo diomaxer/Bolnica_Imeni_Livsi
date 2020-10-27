@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product
+from .models import Product, Images
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -9,7 +9,7 @@ class ProductForm(forms.ModelForm):
             'name',
             'id_number',
             'description',
-            'image',
+            #'image',
             'year',
             'diameter1',
             'diameter2',
@@ -30,7 +30,7 @@ class ProductForm(forms.ModelForm):
             'jenev_mark',
             'chronometer',
             'master_chronometer',
-            'photo',
+            #'photo',
 
             # Корпус
 
@@ -83,10 +83,10 @@ class ProductForm(forms.ModelForm):
             'func20',
             'func21',
 
-
-
-
-
-
-
         ]
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
+    class Meta:
+        model = Images
+        fields = ('image', )

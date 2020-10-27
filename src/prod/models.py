@@ -1,5 +1,6 @@
 from django.db import models
-
+from users.models import CustomUser
+from django.utils.text import slugify
 # Create your models here.
 class Sex(models.Model):
     name = models.CharField("Пол", max_length=30)
@@ -162,9 +163,10 @@ class ZipMaterial(models.Model):
         verbose_name_plural = 'Материал застёжки'
 
 class Product(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, )
     name = models.CharField('Название часов', max_length=150)
     id_number = models.CharField('Идентификационный номер', max_length=30)
-    image = models.ImageField('Картинка', upload_to='images/', null=True, blank=True)
+    # image = models.ImageField('Картинка', upload_to='images/', null=True, blank=True)
     description = models.TextField('Описание', max_length=500)
     year = models.IntegerField("Год выпуска", null=True, blank=True)
     diameter1 = models.IntegerField('Диаметр1 мм', null=True, blank=True)
@@ -209,14 +211,14 @@ class Product(models.Model):
     chronometer = models.BooleanField('Хронометр', null=True, blank=True, default=False)
     master_chronometer = models.BooleanField('Мастер хронометр', null=True, blank=True, default=False)
 
-    photo = models.ImageField("Фото",
-                                upload_to="img/admin_watch",
-                                height_field=None,
-                                width_field=None,
-                                max_length=120,
-                                null=True,
-                                blank=True
-                                )
+    #photo = models.ImageField("Фото",
+                                #upload_to="img/admin_watch",
+                                #height_field=None,
+                                #width_field=None,
+                                #max_length=120,
+                                #null=True,
+                                #blank=True
+                                #)
 
     # Корпус
     corpus_material = models.ForeignKey(
@@ -320,6 +322,10 @@ class Product(models.Model):
     func20 = models.BooleanField('GMT/две часовые зоны', null=True, blank=True, default=False)
     func21 = models.BooleanField('Прыгающий час', null=True, blank=True, default=False)
 
+    def get_image_filename(instance, filename):
+        name = instance.post.name
+        slug = slugify(name)
+        return "post_images/%s-%s" % (slug, filename)
 
     def __str__(self):
         return self.name
@@ -327,3 +333,8 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Часы'
         verbose_name_plural = 'Часы'
+
+class Images(models.Model):
+    post = models.ForeignKey(Product, on_delete=models.CASCADE, default=None)
+    image = models.ImageField(upload_to='media',
+                              verbose_name='Image')

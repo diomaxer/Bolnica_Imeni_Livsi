@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Sex, Product, WatchType, Brand, Equipment, MehType, Condition, Colour, Material, Glass, BezelMaterial, Waterproof, BracerColour, BracerMaterial, Numbers, ZipType, ZipMaterial
+from .models import Images ,Sex, Product, WatchType, Brand, Equipment, MehType, Condition, Colour, Material, Glass, BezelMaterial, Waterproof, BracerColour, BracerMaterial, Numbers, ZipType, ZipMaterial
 
 # Register your models here.
 
@@ -20,3 +20,4 @@ admin.site.register(Waterproof)
 admin.site.register(Numbers)
 admin.site.register(ZipType)
 admin.site.register(ZipMaterial)
+admin.site.register(Images)
