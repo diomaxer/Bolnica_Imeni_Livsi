@@ -1,9 +1,24 @@
-{% extends 'my_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+{% verbatim %}
+<div class="container" id="list_all">
 
-{% block title %}
-  <title>All Page</title>
-{% endblock %}
+    <div v-for="order in orders">
+        name: {{ order.name }} <br>
+        user: {{ order.user }} <br>
+        description: {{ order.description }} <br>
+    </div>
 
-{% block content %}
-    <H1>All Products</H1>
-{% endblock %}
+</div>
+{% endverbatim %}
+<script src="/static/app.js"></script>
+</body>
+</html>

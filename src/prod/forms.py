@@ -9,7 +9,7 @@ class ProductForm(forms.ModelForm):
             'name',
             'id_number',
             'description',
-            #'image',
+            'price',
             'year',
             'diameter1',
             'diameter2',
@@ -61,29 +61,30 @@ class ProductForm(forms.ModelForm):
 
             # Функции
 
-            'func1',
-            'func2',
-            'func3',
-            'func4',
-            'func5',
-            'func6',
-            'func7',
-            'func8',
-            'func9',
-            'func10',
-            'func11',
-            'func12',
-            'func13',
-            'func14',
-            'func15',
-            'func16',
-            'func17',
-            'func18',
-            'func19',
-            'func20',
-            'func21',
+            'moon_faze',
+            'chronograf',
+            'flyback',
+            'the_striking_mechanism',
+            'turbion',
+            'day_in_week',
+            'day_in_year',
+            'calendar_on_4_years',
+            'alarm_clock',
+            'calendar_of_time',
+            'tahimetr',
+            'minute_repeater',
+            'split_chronograf',
+            'panoramic_date',
+            'repeater',
+            'date',
+            'month_indicator',
+            'year_calendar',
+            'eternal_calendar',
+            'gmt',
+            'jump_hour'
 
         ]
+
 
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(label='Image')

@@ -2,6 +2,8 @@ from django.db import models
 from users.models import CustomUser
 from django.utils.text import slugify
 # Create your models here.
+
+
 class Sex(models.Model):
     name = models.CharField("Пол", max_length=30)
 
@@ -11,6 +13,7 @@ class Sex(models.Model):
     class Meta:
         verbose_name = 'Пол'
         verbose_name_plural = 'Пол'
+
 
 class WatchType(models.Model):
     name = models.CharField("Тип часов", max_length=30)
@@ -22,6 +25,7 @@ class WatchType(models.Model):
         verbose_name = 'Тип часов'
         verbose_name_plural = 'Типы часов'
 
+
 class Brand(models.Model):
     name = models.CharField("Бренд часов", max_length=30)
 
@@ -31,6 +35,7 @@ class Brand(models.Model):
     class Meta:
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'
+
 
 class Equipment(models.Model):
     name = models.CharField("Комплектация", max_length=30)
@@ -42,6 +47,7 @@ class Equipment(models.Model):
         verbose_name = 'Комплектация'
         verbose_name_plural = 'Комплектация'
 
+
 class MehType(models.Model):
     name = models.CharField("Тип механизма", max_length=30)
 
@@ -51,6 +57,7 @@ class MehType(models.Model):
     class Meta:
         verbose_name = 'Тип механизма'
         verbose_name_plural = 'Тип механизма'
+
 
 class Condition(models.Model):
     name = models.CharField("Состояние часов", max_length=30)
@@ -62,6 +69,7 @@ class Condition(models.Model):
         verbose_name = 'Состояние часов'
         verbose_name_plural = 'Состояние часов'
 
+
 class Colour(models.Model):
     name = models.CharField("Цвет", max_length=30)
 
@@ -71,6 +79,7 @@ class Colour(models.Model):
     class Meta:
         verbose_name = 'Цвет'
         verbose_name_plural = 'Цвет'
+
 
 class BracerColour(models.Model):
     name = models.CharField("Цвет браслета", max_length=30)
@@ -82,6 +91,7 @@ class BracerColour(models.Model):
         verbose_name = 'Цвет браслета'
         verbose_name_plural = 'Цвет браслета'
 
+
 class Material(models.Model):
     name = models.CharField("Материал", max_length=30)
 
@@ -91,6 +101,7 @@ class Material(models.Model):
     class Meta:
         verbose_name = 'Материал'
         verbose_name_plural = 'Материал'
+
 
 class BezelMaterial(models.Model):
     name = models.CharField("Материал безеля", max_length=30)
@@ -102,6 +113,7 @@ class BezelMaterial(models.Model):
         verbose_name = 'Материал безеля'
         verbose_name_plural = 'Материал безеля'
 
+
 class BracerMaterial(models.Model):
     name = models.CharField("Материал браслета", max_length=30)
 
@@ -111,6 +123,7 @@ class BracerMaterial(models.Model):
     class Meta:
         verbose_name = 'Материал браслета'
         verbose_name_plural = 'Материал браслета'
+
 
 class Glass(models.Model):
     name = models.CharField("Стекло", max_length=30)
@@ -122,6 +135,7 @@ class Glass(models.Model):
         verbose_name = 'Стекло'
         verbose_name_plural = 'Стекло'
 
+
 class Waterproof(models.Model):
     name = models.CharField("Водонепраницаемость", max_length=30)
 
@@ -131,6 +145,7 @@ class Waterproof(models.Model):
     class Meta:
         verbose_name = 'Водонепраницаемость'
         verbose_name_plural = 'Водонепраницаемость'
+
 
 class Numbers(models.Model):
     name = models.CharField("Цифры", max_length=30)
@@ -142,6 +157,7 @@ class Numbers(models.Model):
         verbose_name = 'Цифры'
         verbose_name_plural = 'Цифры'
 
+
 class ZipType(models.Model):
     name = models.CharField("Тип застёжки", max_length=30)
 
@@ -151,6 +167,7 @@ class ZipType(models.Model):
     class Meta:
         verbose_name = 'Тип застёжки'
         verbose_name_plural = 'Тип застёжки'
+
 
 class ZipMaterial(models.Model):
     name = models.CharField("Материал застёжки", max_length=30)
@@ -162,11 +179,12 @@ class ZipMaterial(models.Model):
         verbose_name = 'Материал застёжки'
         verbose_name_plural = 'Материал застёжки'
 
+
 class Product(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, )
     name = models.CharField('Название часов', max_length=150)
     id_number = models.CharField('Идентификационный номер', max_length=30)
-    # image = models.ImageField('Картинка', upload_to='images/', null=True, blank=True)
+    price = models.DecimalField('Цена', max_digits=15, decimal_places=2)
     description = models.TextField('Описание', max_length=500)
     year = models.IntegerField("Год выпуска", null=True, blank=True)
     diameter1 = models.IntegerField('Диаметр1 мм', null=True, blank=True)
@@ -210,15 +228,6 @@ class Product(models.Model):
     jenev_mark = models.BooleanField('Женевское клеймо', null=True, blank=True, default=False)
     chronometer = models.BooleanField('Хронометр', null=True, blank=True, default=False)
     master_chronometer = models.BooleanField('Мастер хронометр', null=True, blank=True, default=False)
-
-    #photo = models.ImageField("Фото",
-                                #upload_to="img/admin_watch",
-                                #height_field=None,
-                                #width_field=None,
-                                #max_length=120,
-                                #null=True,
-                                #blank=True
-                                #)
 
     # Корпус
     corpus_material = models.ForeignKey(
@@ -300,27 +309,27 @@ class Product(models.Model):
     )
 
     # Функции
-    func1 = models.BooleanField('Индикатор фазы луны', null=True, blank=True, default=False)
-    func2 = models.BooleanField('Хронограф', null=True, blank=True, default=False)
-    func3 = models.BooleanField('Flyback-функция', null=True, blank=True, default=False)
-    func4 = models.BooleanField('Механизм боя', null=True, blank=True, default=False)
-    func5 = models.BooleanField('Турбийон', null=True, blank=True, default=False)
-    func6 = models.BooleanField('Индикатор дней недели', null=True, blank=True, default=False)
-    func7 = models.BooleanField('Индикатор года', null=True, blank=True, default=False)
-    func8 = models.BooleanField('Календарь на 4 года', null=True, blank=True, default=False)
-    func9 = models.BooleanField('Будильник', null=True, blank=True, default=False)
-    func10 = models.BooleanField('Уравнение времени', null=True, blank=True, default=False)
-    func11 = models.BooleanField('Тахиметр', null=True, blank=True, default=False)
-    func12 = models.BooleanField('Минутный репитор', null=True, blank=True, default=False)
-    func13 = models.BooleanField('Сплит-хронограф', null=True, blank=True, default=False)
-    func14 = models.BooleanField('Панорамная дата', null=True, blank=True, default=False)
-    func15 = models.BooleanField('Репитер', null=True, blank=True, default=False)
-    func16 = models.BooleanField('Дата', null=True, blank=True, default=False)
-    func17 = models.BooleanField('Индикатор месяца', null=True, blank=True, default=False)
-    func18 = models.BooleanField('Годовой календарь', null=True, blank=True, default=False)
-    func19 = models.BooleanField('Вечный календарь', null=True, blank=True, default=False)
-    func20 = models.BooleanField('GMT/две часовые зоны', null=True, blank=True, default=False)
-    func21 = models.BooleanField('Прыгающий час', null=True, blank=True, default=False)
+    moon_faze = models.BooleanField('Индикатор фазы луны', null=True, blank=True, default=False)
+    chronograf = models.BooleanField('Хронограф', null=True, blank=True, default=False)
+    flyback = models.BooleanField('Flyback-функция', null=True, blank=True, default=False)
+    the_striking_mechanism = models.BooleanField('Механизм боя', null=True, blank=True, default=False)
+    turbion = models.BooleanField('Турбийон', null=True, blank=True, default=False)
+    day_in_week = models.BooleanField('Индикатор дней недели', null=True, blank=True, default=False)
+    day_in_year = models.BooleanField('Индикатор года', null=True, blank=True, default=False)
+    calendar_on_4_years = models.BooleanField('Календарь на 4 года', null=True, blank=True, default=False)
+    alarm_clock = models.BooleanField('Будильник', null=True, blank=True, default=False)
+    calendar_of_time = models.BooleanField('Уравнение времени', null=True, blank=True, default=False)
+    tahimetr = models.BooleanField('Тахиметр', null=True, blank=True, default=False)
+    minute_repeater = models.BooleanField('Минутный репитор', null=True, blank=True, default=False)
+    split_chronograf = models.BooleanField('Сплит-хронограф', null=True, blank=True, default=False)
+    panoramic_date = models.BooleanField('Панорамная дата', null=True, blank=True, default=False)
+    repeater = models.BooleanField('Репитер', null=True, blank=True, default=False)
+    date = models.BooleanField('Дата', null=True, blank=True, default=False)
+    month_indicator = models.BooleanField('Индикатор месяца', null=True, blank=True, default=False)
+    year_calendar = models.BooleanField('Годовой календарь', null=True, blank=True, default=False)
+    eternal_calendar = models.BooleanField('Вечный календарь', null=True, blank=True, default=False)
+    gmt = models.BooleanField('GMT/две часовые зоны', null=True, blank=True, default=False)
+    jump_hour = models.BooleanField('Прыгающий час', null=True, blank=True, default=False)
 
     def get_image_filename(instance, filename):
         name = instance.post.name
@@ -334,7 +343,15 @@ class Product(models.Model):
         verbose_name = 'Часы'
         verbose_name_plural = 'Часы'
 
+
 class Images(models.Model):
-    post = models.ForeignKey(Product, on_delete=models.CASCADE, default=None)
+    post = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='media',
-                              verbose_name='Image')
+                              verbose_name='Image',
+                              null=True,
+                              blank=True,
+                              )
+
+    class Meta:
+        verbose_name = 'Картинка'
+        verbose_name_plural = 'Картинки'
