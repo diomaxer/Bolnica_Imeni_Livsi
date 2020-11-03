@@ -4,11 +4,16 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Welcome, {{ user.email }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  Welcome, {{ user.username }}!
+  <p><a href="{% url 'lk' %}">Все пользователи</a></p>
+  <p><a href="{% url 'logout' %}">Выйти</a></p>
+  <p><a href="{% url 'create' %}">Создать объявление</a></p>
+  <p><a href="{% url 'all' %}">Все предложения</a></p>
+<p><a href="{% url 'lk_detail_view' user.id %}">Войти в личный кабинет</a></p>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
+  <p>Вы не авторизированы</p>
+  <a href="{% url 'login' %}">Войти</a> |
+  <a href="{% url 'signup' %}">Зарегистрироваться</a><br><br>
+Чтобы создавать обявления ввам необходимо <a href="{% url 'login' %}">войти в систему</a>
 {% endif %}
 {% endblock %}
