@@ -42,10 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Allauth apps
-    #'allauth',
-    #'allauth.account',
-    #'allauth.socialaccount',
+    'rest_framework',
 
     # My apps
     'prod',

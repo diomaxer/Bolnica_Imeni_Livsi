@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('create/', post, name='create'),
     path('watch/', include('prod.urls')),
+    path('<int:pk>', views.ProductDetailView.as_view(), name='product_detail_view'),
 
     # USER
     path('users/', include('users.urls')),
