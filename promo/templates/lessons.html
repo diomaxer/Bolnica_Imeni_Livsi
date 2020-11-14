@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lessons</title>
+</head>
+<body>
+<H1>All Lessons</H1>
+<div>
+    {% if user.is_authenticated %}
+        {% if lessons.count > 0 %}
+        <table>
+            <tr><th>Название</th><th>Цена</th></tr>
+            {% for prod in lessons %}
+            <tr>
+                <td>{{ prod.name }}</td>
+                <td>{{ prod.price }} Buck$</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+        </table>
+    {% else %}
+        {% if lessons.count > 0 %}
+        <table>
+            <tr><th>Название</th><th>Цена</th></tr>
+            {% for prod in lessons %}
+            <tr>
+                <td>{{ prod.name }}</td>
+                <td>{{ prod.price }} Buck$</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+        </table>
+    {% endif %}
+</div>
+</body>
+</html>

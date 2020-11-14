@@ -1,0 +1,11 @@
+{% if user.is_authenticated %}
+  Welcome, {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Выйти</a></p>
+  <p><a href="{% url 'lessons_view' %}">Все уроки</a></p>
+{% else %}
+  <p>Вы не авторизированы</p>
+  <a href="{% url 'login' %}">Войти</a> |
+  <a href="{% url 'signup' %}">Зарегистрироваться</a><br><br>
+  <p><a href="{% url 'lessons_view' %}">Все уроки</a></p>
+Чтобы купить урок, ввам необходимо <a href="{% url 'login' %}">войти в систему</a>
+{% endif %}
