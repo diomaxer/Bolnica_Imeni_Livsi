@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body class="account-bg">
+
+{% include 'menu-mobile.html' %}
+
+{% include 'menu-main.html' %}
+
+<div class="lessonpage-main grid">
+    <h1>Демо-урок</h1>
+    <div class="pick-lesson">   
+        <a href="../../../" class="button-main">К выбору уроков</a>
+    </div>
+    <div class="lessonpage-window grid">
+        {% if pagenumber == 1 %}
+            <a class="lesson-nav lesson-nav-left" href="/"></a>
+        {% else %}
+            <a class="lesson-nav lesson-nav-left" href="../{{ decrement }}"></a>
+        {% endif %}
+        <div class="lessonpage-content">
+            {{ obj|safe }}
+        </div>
+        {% if obj.is_last %}
+            <a class="lesson-nav lesson-nav-right" href="/account/signup"></a>
+        {% else %}
+            <a class="lesson-nav lesson-nav-right" href="../{{ increment }}"></a>
+        {% endif %}
+        <div class="lessonpage-window-pages">
+            <p>Вы на странице <b>{{ pagenumber }}</b></p>
+
+            {% for p in pages %}
+                <a href="../{{ forloop.counter }}">{{ forloop.counter }}</a>
+            {% endfor %}
+                <br><a class="lesson-nav" href="/account/signup" style="width: 100%; height: 100%;">Регистрация</a>
+        </div>
+    </div>
+</div>
+
+
+{% include 'footer.html' %}
+<!-- popup -->
+{% include 'popup.html' %}
+{% include 'emptytutors.html' %}
+
+</body>
+</html>

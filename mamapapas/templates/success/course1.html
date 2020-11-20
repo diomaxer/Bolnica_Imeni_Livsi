@@ -1,0 +1,17 @@
+{% load static %}
+{% include 'head.html' %}
+{% load crispy_forms_tags %}
+
+<body class="account-bg">
+
+{% include 'menu-mobile.html' %}
+
+{% include 'menu-main.html' %}
+
+<div class="account-main grid">
+    <form class="account-window grid" action="/course" method="get">{% csrf_token %}
+        <p>{{ text }}</p>
+        <button class="button-main">В личный кабинет</button>
+    </form>
+</div>
+{% include 'footer.html' %}

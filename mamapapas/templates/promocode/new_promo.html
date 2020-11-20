@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New promo</title>
+</head>
+<body>
+<h2>Активируйте ваш прокод</h2>
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% for field in postForm %}
+       Введите ваш прокод {{ field }} <br/>
+  {% endfor %}
+    <br/>
+  <button type="submit" value="Save" >Активировать</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% load static %}
+<footer id="foot">
+    <div class="footer-content grid">
+        <ul>
+            <li><a href="/">© MamaPapas.club</a></li>
+            <li><a href="/#intro">О нас</a></li>
+            <li><a href="/#programs">Курсы</a></li>
+            <li><a href="/#tutors">Специалисты</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="/course">Кабинет</a></li>
+            {% else %}
+                <li><a href="/account/signup/">Регистрация</a></li>
+            {% endif %}
+        </ul>
+        <ul>
+            <li><a href="mailto:info@mamapapas.club">info@mamapapas.club</a></li>
+            <li><span><a href="tel:+78005117699">+7 (800) 511 76 99</a></span></li>
+        </ul>
+        <a class="footer-instagram" href="https://instagram.com/mamapapas_club" class="instagram-footer"><img src="{% static '/img/icons/instagram-footer.svg' %}" alt=""></a>
+    </div>
+
+    <!-- Mobile version starts here -->
+    <div class="footer-content-mobile grid">
+        <img src="{% static '/img/footer-logo-mobile.png' %}" alt="">
+        <ul class="footer-mobile-menu">
+            <li><a href="#">О нас</a></li>
+            <li><a href="#">Курсы</a></li>
+            <li><a href="#">Специалисты</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="/course">Кабинет</a></li>
+            {% else %}
+                <li><a href="/account/signup/">Регистрация</a></li>
+            {% endif %}
+        </ul>
+        <ul class="footer-mobile-contacts">
+            <li><img src="{% static '/img/icons/footer-mobile-email.png' %}" alt=""> <a href="mailto:info@mamapapas.club">info@mamapapas.club</a></li>
+            <li><img src="{% static '/img/icons/footer-mobile-phone.png' %}" alt=""> <a href="tel:+78005117699"><span>+7 (800) 511-76-99</span></a></li>
+            <li><img src="{% static '/img/icons/footer-mobile-instagram.png' %}" alt=""> <a href="#">@mamapapas_club</a></li>
+        </ul>
+        <p>© Mamapapas.club</p>
+    </div>
+    <!-- -->
+</footer>

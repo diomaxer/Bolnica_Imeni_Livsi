@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% include 'head.html' %}
+<body class="account-bg">
+
+{% include 'menu-mobile.html' %}
+
+{% include 'menu-main.html' %}
+
+<div class="courses-main grid">
+    <h1>Выбор курса</h1>
+    <div class="progress-block grid">
+        <h2>Уроков открыто ({{ progress.count }} из {{ lessons.count }}) <br> Действует скидка 10%!</h2>
+
+        <div class="progress-bar grid" style="grid-template-columns: repeat({{lessons.count}},1fr)">
+        {% for p in progress.all %}
+            <div class="progress-done"></div>
+        {% endfor %}
+        </div>
+
+    </div>
+    <div class="course-window grid">
+        {% for c in courses %}
+            {% if c in permissions %}
+                <a class="course-item grid" href="/course/{{ c.course_id }}">
+                    <div class="course-item-image" style="background-image: url('/media/{{ c.preview }}')"></div>
+                    <div class="course-item-title">
+                        <h2>{{ c.title }}</h2>
+                    </div>
+                    <form action="/#courses" method="get">
+                    <button class="hidden-link button-main">Приобрести курс</button>
+                    </form>
+                </a>
+            {% else %}
+                <a class="course-item grid is-lock{{ forloop.counter }}">
+                    <script defer>
+                        $(document).ready(function(){
+                            $('.is-lock{{ forloop.counter }}').click(function(){
+                                $('.is-lock{{ forloop.counter }}').toggleClass('is-locked-style');
+                            })
+                        });
+                    </script>
+                    <div class="course-item-image" style="background-image: url('/media/{{ c.preview }}')"></div>
+                    <div class="course-item-title">
+                        <h2>{{ c.title }}</h2>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                            <input type="hidden" name="receiver" value="410016179694522">
+                            <input type="hidden" name="formcomment" value="Оплата курса '{{ c.title }}'">
+                            <input type="hidden" name="short-dest" value="Оплата курса '{{ c.title }}' вместе с консультациями">
+                            <input type="hidden" name="label" value="102030">
+                            <input type="hidden" name="quickpay-form" value="donate">
+                            <input type="hidden" name="targets" value="Курс {{ c.title }}">
+                            <input type="hidden" name="sum" value="{{ c.price }}" data-type="number">
+                            <input type="hidden" name="comment" value="Для завершения операции обязательно нажмите на кнопку 'вернуться на сайт'!">
+                            <input type="hidden" name="need-fio" value="true">
+                            <input type="hidden" name="need-email" value="true">
+                            <input type="hidden" name="need-phone" value="false">
+                            <input type="hidden" name="need-address" value="false">
+                            <input type="hidden" name="successURL" value="https://mamapapas.club/success/course{{ forloop.counter }}/">
+                            <label><input type="hidden" name="paymentType" value="PC"></label>
+                            <label><input type="hidden" name="paymentType" value="AC"></label>
+                            <button class="button-main hidden-link">Открыть курс {{ c.title }}</button>
+                        </form>
+                        <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                            <input type="hidden" name="receiver" value="410016179694522">
+                            <input type="hidden" name="formcomment" value="Оплата полного курса мамапапас">
+                            <input type="hidden" name="short-dest" value="Оплата полного курса мамапапас, включающего курсы 'Беременность', 'Роды' и 'Новая жизнь'">
+                            <input type="hidden" name="label" value="102030">
+                            <input type="hidden" name="quickpay-form" value="donate">
+                            <input type="hidden" name="targets" value="Полный курс мамапапас">
+                            <input type="hidden" name="sum" value="4999" data-type="number">
+                            <input type="hidden" name="comment" value="Для завершения операции обязательно нажмите на кнопку 'вернуться на сайт'!">
+                            <input type="hidden" name="need-fio" value="true">
+                            <input type="hidden" name="need-email" value="true">
+                            <input type="hidden" name="need-phone" value="false">
+                            <input type="hidden" name="need-address" value="false">
+                            <input type="hidden" name="successURL" value="https://mamapapas.club/success/full_course/">
+                            <label><input type="hidden" name="paymentType" value="PC"></label>
+                            <label><input type="hidden" name="paymentType" value="AC"></label>
+                            <button class="button-main hidden-link">Открыть полный курс</button>
+                        </form>
+                    {% else %}
+                        <form method="GET" action="/account/signup">
+                            <input type="hidden" name="registerContext" value="*Перед покупкой курса необходима регистрация. Мы вернем вас на домашнюю страницу, где вы затем сможете выбрать нужный курс">
+                            <button class="button-main hidden-link">Открыть курс {{ c.title }}</button>
+                        </form>
+                        <form method="GET" action="/account/signup">
+                            <input type="hidden" name="registerContext" value="*Перед покупкой курса необходима регистрация. Мы вернем вас на домашнюю страницу, где вы затем сможете выбрать нужный курс">
+                            <button class="button-main hidden-link">Открыть полный курс</button>
+                        </form>
+                    {% endif %}
+                    
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% include 'footer.html' %}
+<!-- popup -->
+{% include 'popup.html' %}
+{% include 'emptytutors.html' %}
+
+</body>
+</html>

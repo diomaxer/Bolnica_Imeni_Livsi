@@ -1,0 +1,30 @@
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /account/
+Disallow: /course/
+Disallow: /success/
+Disallow: /media/
+
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /account/
+Disallow: /course/
+Disallow: /success/
+Disallow: /media/
+
+User-agent: Mail.Ru
+Disallow: /admin/
+Disallow: /account/
+Disallow: /course/
+Disallow: /success/
+Disallow: /media/
+
+User-agent: *
+Disallow: /admin/
+Disallow: /account/
+Disallow: /course/
+Disallow: /success/
+Disallow: /media/
+
+Sitemap: https://mamapapas.club/static/sitemap.xml
+Host: https://mamapapas.club/

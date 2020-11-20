@@ -1,0 +1,26 @@
+{% load static %}
+{% include 'head.html' %}
+{% load crispy_forms_tags %}
+
+<body class="account-bg">
+
+{% include 'menu-mobile.html' %}
+
+{% include 'menu-main.html' %}
+
+<div class="account-main grid">
+    <form class="account-window grid" action="/account/login/" method="post">{% csrf_token %}
+        {{ form|crispy }}
+        <button class="button-main">Вход</button>
+        <small>* для входа введите ваш email маленькими буквами</small>
+        <small>Нет аккаунта? <a href="/account/signup">Зарегистрируйтесь</a></small>
+        <small><a href="/account/password/reset">Восстановить пароль</a></small>
+    </form>
+</div>
+{% include 'footer.html' %}
+<!-- popup -->
+{% include 'popup.html' %}
+{% include 'emptytutors.html' %}
+
+</body>
+</html>

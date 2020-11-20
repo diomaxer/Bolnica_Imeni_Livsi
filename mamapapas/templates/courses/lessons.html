@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% include 'head.html' %}
+<body class="account-bg">
+
+{% include 'menu-mobile.html' %}
+
+{% include 'menu-main.html' %}
+
+{% if course in permissions %}
+<div class="lessons-main grid">
+    <h1>{{ course.title }}</h1>
+    <div class="progress-block grid">
+        <h2>Уроков открыто ({{ progress.count }} из {{ lessons.count }})</h2>
+        <div class="progress-bar grid" style="grid-template-columns: repeat({{lessons.count}},1fr)">
+        {% for p in progress %}    
+            <div class="progress-done"></div>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="pick-course">
+        <a href="../" class="button-main">К выбору курса</a>
+    </div>
+    <div class="lesson-window grid">
+    
+        {% for l in lessons %}
+            {% if l in progress_list %}
+                <a href="{{ l.lesson_id }}/content/1" class="lesson-item grid">
+                    <div class="lesson-item-image" style="background-image: url('/media/{{ l.preview }}')"></div>
+                    <div class="lesson-item-title">
+                        <p>{{ l.title }}</p>
+                    </div>
+                </a>
+            {% else %}
+                <a class="lesson-item grid is-lock{{ forloop.counter }}">
+                    <script defer>
+                        $(document).ready(function(){
+                            $('.is-lock{{ forloop.counter }}').click(function(){
+                                $('.is-lock{{ forloop.counter }}').toggleClass('is-locked-style');
+                            })
+                        });
+                    </script>
+                    <div class="lesson-item-image" style="background-image: url('/media/{{ l.preview }}'); -webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
+                    <div class="lesson-item-title">
+                        <p class="text-marked">{{ l.title }}</p>
+                    </div>
+                    <button class="hidden-link button-main">Пройдите предыдущий урок</button>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="lessonpage-main grid">
+    <h1>{{ title }}</h1>
+    <div class="pick-lesson">   
+        <a href="../" class="button-main">К выбору курсов</a>
+    </div>
+    <div class="lessonpage-window grid">
+        <div class="lessonpage-content grid">
+            <h2>Доступ закрыт</h2>
+            <p>Для просмотра материалов требуется приобретение курса</p>
+            <form action="/#courses" method="get">
+                <button class="button-main">Приобрести курс</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% include 'footer.html' %}
+<!-- popup -->
+{% include 'popup.html' %}
+{% include 'emptytutors.html' %}
+
+</body>
+</html>
