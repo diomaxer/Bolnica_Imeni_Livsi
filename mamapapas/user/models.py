@@ -21,16 +21,3 @@ class User(AbstractUser):
     )
 
 
-class UsersPromocode(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name="Новый просокод")
-    new_promo = models.CharField('Промокод', max_length=255, blank=True)
-
-    def __str__(self):
-        return self.new_promo
-
-    class Meta:
-        verbose_name = 'Промокод пользователя'
-        verbose_name_plural = 'Промокоды пользователей'

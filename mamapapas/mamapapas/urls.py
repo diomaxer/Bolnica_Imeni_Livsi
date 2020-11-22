@@ -31,10 +31,6 @@ from coursefile.views import coursefile_view
 # Чаты
 from django_private_chat import urls as django_private_chat_urls
 
-# Промокоды
-from user.views import new_promo_view
-
-
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
@@ -44,7 +40,6 @@ urlpatterns = [
     path('course/<int:course_id>/', course_name_view, name='course_name'),
     path('account/', include('allauth.urls')),
     path('privacy/', privacy_view, name='privacy'),
-    path('new_promo/', new_promo_view, name='new_promo_view'),
 
     # вывод контента
     path('course/<int:course_id>/<int:lesson_id>/content/<int:order>/', content_view, name='content'),

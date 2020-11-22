@@ -16,7 +16,6 @@ try:
 except ImportError:
     from .prod_settings import *
 
-import os.path
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
     'faq',
     'page',
     'payment',
-    'promocode',
     'review',
     'uploads',
     'user'
@@ -121,11 +119,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 # STATIC_URL = '/static/'
-# SROOT = '/Users/Dima/PycharmProjects/pythonProject/pythonProject1/venv/mamapapas/static/'
+# STATIC_ROOT = '/Users/jesus/Documents/freelance/mamapapas_upd/mamapapas/static/'
 
 
 AUTH_USER_MODEL = 'user.User'
@@ -134,14 +133,6 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/course'
 LOGIN_URL = '/account/login'
 LOGOUT_REDIRECT_URL = '/home'
-
-
-
-STATIC_ROOT = ''
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = ( os.path.join('static'), )
 
 CRISPY_CLASS_CONVERTERS = {
     'countrol-group': '',

@@ -12,10 +12,6 @@ class Course(models.Model):
     
     def __str__(self):
         return self.title
-
-    def half_sale(self):
-        price = int(self.price / 2)
-        return price
-
+        
     def get_absolute_url(self):
         return "/courses/{self.course_id}/"

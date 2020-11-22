@@ -11,28 +11,15 @@ from review.models import Review
 
 from .forms import ContactForm
 
-from promocode.models import Promo
-from user.models import UsersPromocode
-
-# Проверка наличия промокода у юзера
-def promo_check(username, promo):
-    for i in range(len(promo)):
-        if str(username) == str(promo[i].user):
-            return True
-    return False
-
 
 def home_view(request, *args, **kwargs):
     form = ContactForm(request.POST)
-    new_promo = UsersPromocode.objects.all()
-    promo = Promo.objects.all()
 
     if form.is_valid():
         sender = 'no-reply@mamapapas.club'
         subject_admin = 'Сообщение из формы'
         message_admin = 'E-mail: '+form.cleaned_data['email']+' | '+'Имя: '+str(form.cleaned_data['name'])+' | '+'Телефон: '+form.cleaned_data['phone']
         recipients_admin = ['mamapapasclub@yandex.ru']
-
         if message_admin:
             recipients_admin.append(sender)
         send_mail(subject_admin, message_admin, sender, recipients_admin)
@@ -61,10 +48,7 @@ def home_view(request, *args, **kwargs):
         'faqs' : Faq.objects.filter().order_by('faq_order'),
     	'reviews' : Review.objects.filter().order_by('review_order'),
     }
-    if promo_check(request.user.username, new_promo):
-        return render(request, 'home_sale.html', my_context)
     return render(request, 'home.html', my_context)
-
 
 
 def privacy_view(request, *args, **kwargs):
