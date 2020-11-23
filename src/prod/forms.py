@@ -37,6 +37,7 @@ class ProductForm(forms.ModelForm):
             'corpus_material',
             'bezel_material',
             'thickness',
+            'glass',
             'waterproof',
             'back_cap',
 

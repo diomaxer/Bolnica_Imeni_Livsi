@@ -225,26 +225,22 @@ class Product(models.Model):
         Material,
         on_delete=models.CASCADE,
         verbose_name='Материал корпуса',
-        null = True, blank = True
     )
     bezel_material = models.ForeignKey(
         BezelMaterial,
         on_delete=models.CASCADE,
         verbose_name='Материал безеля',
-        null=True, blank=True
     )
     thickness = models.CharField('Толщина', max_length=30, null=True, blank=True)
     glass = models.ForeignKey(
         Glass,
         on_delete=models.CASCADE,
-        verbose_name='Материал безеля',
-        null=True, blank=True
+        verbose_name='Стекло',
     )
     waterproof = models.ForeignKey(
         Waterproof,
         on_delete=models.CASCADE,
         verbose_name='Водонепроницаемость',
-        null=True, blank=True
     )
     back_cap = models.BooleanField('Прозрачная задняя крышка', null=True, blank=True, default=False)
     jewelry = models.BooleanField('Отделка драгоценными камнями', null=True, blank=True, default=False)
@@ -255,13 +251,11 @@ class Product(models.Model):
         Colour,
         on_delete=models.CASCADE,
         verbose_name='Циферблат',
-        null=True, blank=True
     )
     numbers = models.ForeignKey(
         Numbers,
         on_delete=models.CASCADE,
         verbose_name='Цифры',
-        null=True, blank=True
     )
     dial1 = models.BooleanField('Гильошированный циферблат', null=True, blank=True, default=False)
     dial2 = models.BooleanField('Ручное гильоширование', null=True, blank=True, default=False)
@@ -278,25 +272,21 @@ class Product(models.Model):
         BracerMaterial,
         on_delete=models.CASCADE,
         verbose_name='Материал браслета',
-        null=True, blank=True
     )
     bracer_colour = models.ForeignKey(
         BracerColour,
         on_delete=models.CASCADE,
         verbose_name='Цвет браслета',
-        null=True, blank=True
     )
     zip_type = models.ForeignKey(
         ZipType,
         on_delete=models.CASCADE,
         verbose_name='Материал застёжки',
-        null=True, blank=True
     )
     zip_material = models.ForeignKey(
         ZipMaterial,
         on_delete=models.CASCADE,
         verbose_name='Тип застёжки',
-        null=True, blank=True
     )
 
     # Функции
