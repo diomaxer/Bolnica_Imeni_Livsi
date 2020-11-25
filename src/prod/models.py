@@ -163,10 +163,10 @@ class ZipMaterial(models.Model):
         verbose_name_plural = 'Материал застёжки'
 
 class Product(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, )
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField('Название часов', max_length=150)
     id_number = models.CharField('Идентификационный номер', max_length=30, null=True, blank=True)
-    price = models.DecimalField('Цена', max_digits=15, decimal_places=2)
+    price = models.DecimalField('Цена', max_digits=15, decimal_places=2, null=True)
     description = models.TextField('Описание', max_length=500, null=True, blank=True)
     year = models.IntegerField("Год выпуска", null=True, blank=True)
     diameter1 = models.IntegerField('Диаметр1 мм', null=True, blank=True)
@@ -175,31 +175,37 @@ class Product(models.Model):
         Sex,
         on_delete=models.CASCADE,
         verbose_name='Пол',
+        null=True,
     )
     watch_type = models.ForeignKey(
         WatchType,
         on_delete=models.CASCADE,
         verbose_name='Тип часов',
+        null=True,
     )
     brand = models.ForeignKey(
         Brand,
         on_delete=models.CASCADE,
         verbose_name='Бренд',
+        null=True,
     )
     condition = models.ForeignKey(
         Condition,
         on_delete=models.CASCADE,
         verbose_name='Состояние часов',
+        null=True,
     )
     equipment = models.ForeignKey(
         Equipment,
         on_delete=models.CASCADE,
         verbose_name='Комплектация',
+        null=True,
     )
     meh_type = models.ForeignKey(
         MehType,
         on_delete=models.CASCADE,
         verbose_name='Тип механизма',
+        null=True,
     )
     # Калибр
     caliber = models.CharField('Калибр/Механизм', max_length=30, null=True, blank=True)
@@ -225,22 +231,26 @@ class Product(models.Model):
         Material,
         on_delete=models.CASCADE,
         verbose_name='Материал корпуса',
+        null=True,
     )
     bezel_material = models.ForeignKey(
         BezelMaterial,
         on_delete=models.CASCADE,
         verbose_name='Материал безеля',
+        null=True,
     )
     thickness = models.CharField('Толщина', max_length=30, null=True, blank=True)
     glass = models.ForeignKey(
         Glass,
         on_delete=models.CASCADE,
         verbose_name='Стекло',
+        null=True,
     )
     waterproof = models.ForeignKey(
         Waterproof,
         on_delete=models.CASCADE,
         verbose_name='Водонепроницаемость',
+        null=True,
     )
     back_cap = models.BooleanField('Прозрачная задняя крышка', null=True, blank=True, default=False)
     jewelry = models.BooleanField('Отделка драгоценными камнями', null=True, blank=True, default=False)
@@ -251,11 +261,13 @@ class Product(models.Model):
         Colour,
         on_delete=models.CASCADE,
         verbose_name='Циферблат',
+        null=True,
     )
     numbers = models.ForeignKey(
         Numbers,
         on_delete=models.CASCADE,
         verbose_name='Цифры',
+        null=True,
     )
     dial1 = models.BooleanField('Гильошированный циферблат', null=True, blank=True, default=False)
     dial2 = models.BooleanField('Ручное гильоширование', null=True, blank=True, default=False)
@@ -272,21 +284,25 @@ class Product(models.Model):
         BracerMaterial,
         on_delete=models.CASCADE,
         verbose_name='Материал браслета',
+        null=True,
     )
     bracer_colour = models.ForeignKey(
         BracerColour,
         on_delete=models.CASCADE,
         verbose_name='Цвет браслета',
+        null=True,
     )
     zip_type = models.ForeignKey(
         ZipType,
         on_delete=models.CASCADE,
         verbose_name='Материал застёжки',
+        null=True,
     )
     zip_material = models.ForeignKey(
         ZipMaterial,
         on_delete=models.CASCADE,
         verbose_name='Тип застёжки',
+        null=True,
     )
 
     # Функции
@@ -326,8 +342,11 @@ class Product(models.Model):
 
 class Images(models.Model):
     post = models.ForeignKey(Product, on_delete=models.CASCADE, default=None)
-    image = models.ImageField(upload_to='media',
-                              verbose_name='Image')
+    image = models.ImageField(
+        upload_to='media',
+        verbose_name='Image',
+        null=True,
+    )
 
     class Meta:
         verbose_name = 'Картинка'

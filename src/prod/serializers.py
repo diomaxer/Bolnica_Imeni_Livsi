@@ -1,25 +1,24 @@
 from rest_framework import serializers
 from .models import Product, Images
 
-
 class ProductSerializer(serializers.ModelSerializer):
-    user_username = serializers.CharField(source='user.username')
-    sex_name = serializers.CharField(source='sex.name')
-    watch_type_name = serializers.CharField(source='watch_type.name')
-    brand_name = serializers.CharField(source='brand.name')
-    condition_name = serializers.CharField(source='condition.name')
-    equipment_name = serializers.CharField(source='equipment.name')
-    meh_type_name = serializers.CharField(source='meh_type.name')
-    corpus_material_name = serializers.CharField(source='corpus_material.name')
-    bezel_material_name = serializers.CharField(source='bezel_material.name')
-    glass_name = serializers.CharField(source='glass.name')
-    waterproof_name = serializers.CharField(source='waterproof.name')
-    dial_name = serializers.CharField(source='dial.name')
-    numbers_name = serializers.CharField(source='numbers.name')
-    bracer_name = serializers.CharField(source='bracer.name')
-    bracer_colour_name = serializers.CharField(source='bracer_colour.name')
-    zip_type_name = serializers.CharField(source='zip_type.name')
-    zip_material_name = serializers.CharField(source='zip_material.name')
+    user_username = serializers.CharField(source='user')
+    sex_name = serializers.CharField(source='sex')
+    watch_type_name = serializers.CharField(source='watch_type')
+    brand_name = serializers.CharField(source='brand')
+    condition_name = serializers.CharField(source='condition')
+    equipment_name = serializers.CharField(source='equipment')
+    meh_type_name = serializers.CharField(source='meh_type')
+    corpus_material_name = serializers.CharField(source='corpus_material')
+    bezel_material_name = serializers.CharField(source='bezel_material')
+    glass_name = serializers.CharField(source='glass')
+    waterproof_name = serializers.CharField(source='waterproof')
+    dial_name = serializers.CharField(source='dial')
+    numbers_name = serializers.CharField(source='numbers')
+    bracer_name = serializers.CharField(source='bracer')
+    bracer_colour_name = serializers.CharField(source='bracer_colour')
+    zip_type_name = serializers.CharField(source='zip_type')
+    zip_material_name = serializers.CharField(source='zip_material')
 
 
     class Meta:
@@ -106,7 +105,20 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
 
 
+class ProductSerializer2(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = "__all__"
+        #depth=1
+
+
 class ImagesSerializer(serializers.ModelSerializer):
+    post_name = serializers.CharField(source='post.name')
+
     class Meta:
         model = Images
-        fields = '__all__'
+        fields = [
+            'post_name',
+            'image',
+        ]
